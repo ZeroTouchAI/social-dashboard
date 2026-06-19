@@ -40,7 +40,7 @@ export async function runActorSync<T>(
   const client = getApifyClient()
 
   const run = await client.actor(actorId).call(input, {
-    timeoutSecs,
+    timeout: timeoutSecs,
     waitSecs: timeoutSecs,
   })
 
