@@ -63,8 +63,8 @@ export async function runActorAsync(
 ): Promise<string> {
   const client = getApifyClient()
 
-  const webhooks = webhookUrl ? [{
-    eventTypes: ['ACTOR.RUN.SUCCEEDED', 'ACTOR.RUN.FAILED'],
+ const webhooks = webhookUrl ? [{
+    eventTypes: ['ACTOR.RUN.SUCCEEDED', 'ACTOR.RUN.FAILED'] as any,
     requestUrl: webhookUrl,
     payloadTemplate: JSON.stringify({
       runId: '{{runId}}',
