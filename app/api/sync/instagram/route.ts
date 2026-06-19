@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
       const profiles = await getDatasetItems<ApifyInstagramProfile>(body.datasetId)
       for (const raw of profiles) {
         const profileData = transformInstagramProfile(raw)
-        const profile = await upsertProfile({ ...profileData, is_client: true })
+        const profile = await upsertProfile({ ...profileData, is_client: true, niche: null, last_synced_at: null })
 
         // Save follower snapshot
         await db.from('follower_snapshots').insert({
