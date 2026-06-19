@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server'
-import { runActorAsync, ACTORS, instagramPostsInput, instagramProfileInput, xSearchInput } from '@/lib/apify/actors'
-import { getApifyClient } from '@/lib/apify/client'
+import { runActorAsync, getApifyClient, ACTORS } from '@/lib/apify/client'
+import { instagramPostsInput, instagramProfileInput, xSearchInput } from '@/lib/apify/actors'
 import { createSyncLog, completeSyncLog } from '@/lib/supabase/queries'
 import { validateCronSecret, jsonResponse, errorResponse } from '@/lib/utils'
 
