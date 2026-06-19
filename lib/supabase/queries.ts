@@ -339,7 +339,7 @@ export async function getNewsTopics(): Promise<string[]> {
     .not('topic', 'is', null)
 
   if (error) throw new Error(`getNewsTopics: ${error.message}`)
-  const topics = [...new Set((data ?? []).map(r => r.topic).filter(Boolean))]
+const topics = Array.from(new Set((data ?? []).map(r => r.topic).filter(Boolean)))
   return topics
 }
 
