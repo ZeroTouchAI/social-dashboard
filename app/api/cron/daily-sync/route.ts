@@ -42,15 +42,20 @@ export async function GET(req: NextRequest) {
     }
   }
 
-  // ── 2. Sync client Instagram posts ──
+// ── 2. Sync client Instagram posts ──
   if (igHandle) {
     try {
       const logId = await createSyncLog('instagram_client')
       const posts = await fetchInstagramPosts(igHandle, 30)
 
+      // Make sure profile exists first
+      const { data: profile } = await db
+        .from('profiles')
+        .upsert({ platform: 'instagram', handle: igHandle, is_client: true, niche: null, last_synced_at: new Date().toISOString() }, { onConflict: 'platform,handle' })
+        .select('id').single()
+      if (!profile) continue
+
       for (const raw of posts) {
-        const { data: profile } = await db.from('profiles').select('id').eq('handle', igHandle).eq('platform', 'instagram').single()
-        if (!profile) continue
 
         const postData = transformInstagramPost(raw, profile.id)
         const { data: post } = await db.from('posts').upsert(postData, { onConflict: 'platform_post_id' }).select().single()
