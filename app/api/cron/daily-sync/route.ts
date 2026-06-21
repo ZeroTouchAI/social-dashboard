@@ -53,7 +53,7 @@ export async function GET(req: NextRequest) {
         .from('profiles')
         .upsert({ platform: 'instagram', handle: igHandle, is_client: true, niche: null, last_synced_at: new Date().toISOString() }, { onConflict: 'platform,handle' })
         .select('id').single()
-      if (!profile) continue
+      if (!profile) throw new Error('Could not create profile')
 
       for (const raw of posts) {
 
