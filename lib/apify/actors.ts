@@ -12,7 +12,7 @@ const RAPIDAPI_HOST_X = 'twitter-x-api.p.rapidapi.com'
 // ─────────────────────────────────────────────
 
 export async function fetchInstagramProfile(handle: string) {
-  const url = `https://${RAPIDAPI_HOST_INSTAGRAM}/v1/info?username_or_id_or_url=${handle}`
+  const url = `https://${RAPIDAPI_HOST_INSTAGRAM}/userinfo/?username_or_id=${handle}`
   const res = await fetch(url, {
     headers: {
       'x-rapidapi-key':  RAPIDAPI_KEY,
@@ -25,7 +25,7 @@ export async function fetchInstagramProfile(handle: string) {
 }
 
 export async function fetchInstagramPosts(handle: string, maxPosts = 20) {
-  const url = `https://${RAPIDAPI_HOST_INSTAGRAM}/v1/posts?username_or_id_or_url=${handle}&limit=${maxPosts}`
+  const url = `https://${RAPIDAPI_HOST_INSTAGRAM}/userposts/?username_or_id=${handle}&limit=${maxPosts}`
   const res = await fetch(url, {
     headers: {
       'x-rapidapi-key':  RAPIDAPI_KEY,
