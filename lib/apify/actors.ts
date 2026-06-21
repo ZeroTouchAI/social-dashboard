@@ -4,7 +4,7 @@ import type { ApifyInstagramPost, ApifyInstagramProfile, ApifyXTweet } from '@/t
 // RAPIDAPI CONFIG
 // ─────────────────────────────────────────────
 const RAPIDAPI_KEY = process.env.RAPIDAPI_KEY!
-const RAPIDAPI_HOST_INSTAGRAM = 'instagram-scraper-stable-api.p.rapidapi.com'
+const RAPIDAPI_HOST_INSTAGRAM = 'instagram-scraper-20251.p.rapidapi.com'
 const RAPIDAPI_HOST_X = 'twitter-x-api.p.rapidapi.com'
 
 // ─────────────────────────────────────────────
@@ -12,7 +12,7 @@ const RAPIDAPI_HOST_X = 'twitter-x-api.p.rapidapi.com'
 // ─────────────────────────────────────────────
 
 export async function fetchInstagramProfile(handle: string) {
-  const url = `https://${RAPIDAPI_HOST_INSTAGRAM}/v1/user_info?username=${handle}`
+  const url = `https://${RAPIDAPI_HOST_INSTAGRAM}/v1/info?username_or_id_or_url=${handle}`
   const res = await fetch(url, {
     headers: {
       'x-rapidapi-key':  RAPIDAPI_KEY,
@@ -25,7 +25,7 @@ export async function fetchInstagramProfile(handle: string) {
 }
 
 export async function fetchInstagramPosts(handle: string, maxPosts = 20) {
-  const url = `https://${RAPIDAPI_HOST_INSTAGRAM}/v1/posts?username=${handle}&limit=${maxPosts}`
+  const url = `https://${RAPIDAPI_HOST_INSTAGRAM}/v1/posts?username_or_id_or_url=${handle}&limit=${maxPosts}`
   const res = await fetch(url, {
     headers: {
       'x-rapidapi-key':  RAPIDAPI_KEY,
