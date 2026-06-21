@@ -39,7 +39,7 @@ export async function fetchInstagramPosts(handle: string, maxPosts = 20) {
 
 export async function fetchXPosts(keywords: string[], maxPosts = 50) {
   const query = keywords.join(' OR ')
-  const url = `https://${RAPIDAPI_HOST_X}/twitter/search?query=${encodeURIComponent(query)}&count=${maxPosts}&type=Top`
+  const url = `https://${RAPIDAPI_HOST_X}/search/top?query=${encodeURIComponent(query)}&count=${maxPosts}`
   const res = await fetch(url, {
     headers: {
       'x-rapidapi-key':  RAPIDAPI_KEY,
